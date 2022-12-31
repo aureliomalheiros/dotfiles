@@ -8,8 +8,7 @@ Configuration VIM
 **
 Plugin install:
 
-- Requirements:
-	![Install Vundle](https://github.com/VundleVim/Vundle.vim)
+> :warning: [Install Vundle](https://github.com/VundleVim/Vundle.vim)
 
 Access vim and exec command:
 
