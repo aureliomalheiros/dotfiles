@@ -5,7 +5,7 @@ My PC configuration!
 
 ---
 ## Configuration VIM
-**
+
 Plugin install:
 
 > :warning: [Install Vundle](https://github.com/VundleVim/Vundle.vim)
