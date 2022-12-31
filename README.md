@@ -4,7 +4,7 @@ My PC configuration!
 ![Cat Cool](img/Am-I-too-cool-for-aww_.jpeg)
 
 ---
-Configuration VIM
+## Configuration VIM
 **
 Plugin install:
 
