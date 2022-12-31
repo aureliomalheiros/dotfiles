@@ -5,16 +5,18 @@ My PC configuration!
 
 ---
 Configuration VIM
-
-**Install fonts**
-
+**
 Plugin install:
+
+- Requirements:
+	![Install Vundle](https://github.com/VundleVim/Vundle.vim)
+
 Access vim and exec command:
 
 ```bash
 :PluginInstall
 ```
-Install fonts using command:
+Install font using command:
 
 ```bash
 fc-cache

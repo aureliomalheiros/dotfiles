@@ -44,6 +44,9 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'preservim/nerdcommenter'
 
+"NerdTree Configuration
+let NERDTreeShowHidden=1
+
 "Nerd Commenter configuration
 filetype plugin on
 let g:NERDSpaceDelims = 1
