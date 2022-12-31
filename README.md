@@ -3,7 +3,7 @@ My PC configuration!
 
 Configuration VIM
 
-** Install fonts **
+**Install fonts**
 
 Plugin install:
 Access vim and exec command:
