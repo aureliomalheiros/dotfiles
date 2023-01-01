@@ -78,10 +78,11 @@ set mouse=a
 set history=5000
 set autoindent
 set smartindent
+set shiftwidth=4
+set expandtab
 
 "Yaml file
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-"autocmd FileType yaml setlocal ts=2 expandtab
 
 "NerdTree
 nnoremap <leader>n :NERDTreeFocus<CR>
