@@ -64,12 +64,16 @@ nnoremap <M-Right> :bn<cr>
 nnoremap <M-Left>  :bp<cr>
 nnoremap <c-x> :bp \|bd #<cr>
 
+"Map key
+nnoremap <F2> :below terminal<CR>
+
 "CTRLPVIM configuration
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_custom_ignore = '\v[\/]\.(swp|zip|hg|svn)$'
 let g:ctrlp_show_hidden = 1
 "Fonts 
 set guifont=DroidSansMono\ Nerd\ Font\ Mono:h12
+
 "Configuration
 set tabstop=4
 set encoding=UTF-8
