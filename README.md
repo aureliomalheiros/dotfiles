@@ -4,17 +4,14 @@ My PC configuration!
 ![Cat Cool](img/Am-I-too-cool-for-aww_.jpeg)
 
 ---
+********Requirements
+- Install git
 
 ```bash
-fc-cache
+sudo apt update
+sudo apt install -y git
 ```
-
-**Install Plugins**
-Requirements:
-- ![Vundle.vim](https://github.com/VundleVim/Vundle.vim)
-Install font using command:
 
 ```bash
-:PluginInstall
-```
----
+git clone https://github.com/aureliomalheiros/dotfiles.git && source dotfiles/config.sh
+``
