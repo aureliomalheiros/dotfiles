@@ -51,3 +51,7 @@ function terraform () {
     sudo apt install -y terraform
 }
 
+updateSystem
+configHome
+basicPrograms
+
