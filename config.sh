@@ -14,7 +14,6 @@ function basicPrograms () {
         nmap    \
         ipcalc  \
         zsh     \
-        gcc     \
         gnupg   \
         software-properties-common
         
