@@ -4,7 +4,7 @@ My PC configuration!
 ![Cat Cool](img/Am-I-too-cool-for-aww_.jpeg)
 
 ---
-********Requirements
+*Requirements*
 - Install git
 
 ```bash
@@ -14,4 +14,4 @@ sudo apt install -y git
 
 ```bash
 git clone https://github.com/aureliomalheiros/dotfiles.git && source dotfiles/config.sh
-``
+```
