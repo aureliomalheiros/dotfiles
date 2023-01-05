@@ -6,11 +6,6 @@ function configHome () {
     echo "[CONFIGURATION $HOME]"
     cp -RT home/ $HOME
 }
-function configVIM () {
-    echo "[CONFIGURATION VIM]"
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    vim +PluginInstall +qall
-}
 function basicPrograms () {
     sudo apt install -y \
         git     \
@@ -24,6 +19,11 @@ function basicPrograms () {
         software-properties-common
         
 }
+function configVIM () {
+    echo "[CONFIGURATION VIM]"
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    vim +PluginInstall +qall
+}
 # Install Golang
 # Virtualization -> Vagrant and virtualbox
 # Install Docker
@@ -32,5 +32,5 @@ function basicPrograms () {
 # Configuration ZSH with theme power10
 updateSystem
 configHome
-configVIM
 basicPrograms
+configVIM
