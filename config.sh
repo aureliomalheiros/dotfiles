@@ -46,11 +46,11 @@ function docker (){
     sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
     sudo chmod 666 /var/run/docker.sock
 }
-function MyZSHWithThemePower10 () {
+function MyZSHWithThemePowerlevel10 () {
     sudo chsh -s /bin/zsh $USER
     wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
     sh install.sh
-    
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k 
 }
 updateSystem
 configHome
@@ -58,4 +58,4 @@ basicPrograms
 configVIM
 k8s
 docker
-MyZSHWithThemePower10
+MyZSHWithThemePowerlevel10
