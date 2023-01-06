@@ -7,7 +7,6 @@ function basicPrograms () {
         git     \
         gcc     \
         curl    \
-        nmap    \
         ipcalc  \
         zsh     \
         gnupg   \
