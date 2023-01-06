@@ -1,9 +1,8 @@
 function updateSystem () {
-    echo "[UPDATE SYSTEM]"
-    sudo apt update >> /dev/null 2>&1 && sudo apt upgrade -y > /dev/null 2>&1
+    echo "[CAT CODE]"
+    sudo apt update
 }
 function configHome () {
-    echo "[CONFIGURATION $HOME]"
     cp -RT home/ $HOME
 }
 function basicPrograms () {
@@ -17,19 +16,21 @@ function basicPrograms () {
         gnupg   \
         software-properties-common \
         ca-certificates curl \
-        apt-transport-https
+        apt-transport-https \
+        flameshot \
+        peek
         
 }
 function configVIM () {
-    echo "[CONFIGURATION VIM]"
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     vim +PluginInstall +qall
 }
 function k8s (){
     sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
     echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
-    sudo apt update >> /dev/null 2>&1
+    sudo apt update
     sudo apt install -y kubectl
+    wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
 }
 
 # Install Golang
