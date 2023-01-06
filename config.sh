@@ -15,11 +15,14 @@ function basicPrograms () {
         zsh     \
         gnupg   \
         software-properties-common \
-        ca-certificates curl \
+        ca-certificates\
+        lsb-release \
         apt-transport-https \
         flameshot \
-        peek
-        
+        peek 
+        wget https://go.dev/dl/go1.19.4.linux-amd64.tar.gz
+        rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.4.linux-amd64.tar.gz
+        export PATH=$PATH:/usr/local/go/bin
 }
 function configVIM () {
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -32,14 +35,27 @@ function k8s (){
     sudo apt install -y kubectl
     wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
 }
-
-# Install Golang
-# Virtualization -> Vagrant and virtualbox
-# Install Docker
-# Kubectl
-# BasicPrograms -> FlameShot, Peek, insync
-# Configuration ZSH with theme power10
+function docker (){
+    sudo apt-get remove docker docker-engine docker.io containerd runc
+    sudo mkdir -p /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt update
+    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    sudo chmod 666 /var/run/docker.sock
+}
+function MyZSHWithThemePower10 () {
+    sudo chsh -s /bin/zsh $USER
+    wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    sh install.sh
+    
+}
 updateSystem
 configHome
 basicPrograms
 configVIM
+k8s
+docker
+MyZSHWithThemePower10
