@@ -4,8 +4,8 @@ My PC configuration!
 ![Cat Cool](img/Am-I-too-cool-for-aww_.jpeg)
 
 ---
-*Requirements*
-- Install git
+
+![Git](https://img.shields.io/badge/requirements-git-red?style=for-the-badge&logo) 
 
 ```bash
 sudo apt update
