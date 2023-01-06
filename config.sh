@@ -15,7 +15,9 @@ function basicPrograms () {
         ipcalc  \
         zsh     \
         gnupg   \
-        software-properties-common
+        software-properties-common \
+        ca-certificates curl \
+        apt-transport-https
         
 }
 function configVIM () {
@@ -23,6 +25,13 @@ function configVIM () {
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     vim +PluginInstall +qall
 }
+function k8s (){
+    sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+    sudo apt update > 2>&1
+    sudo apt install -y kubectl
+}
+
 # Install Golang
 # Virtualization -> Vagrant and virtualbox
 # Install Docker
