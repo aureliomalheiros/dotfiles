@@ -2,9 +2,6 @@ function updateSystem () {
     echo "[CAT CODE]"
     sudo apt update
 }
-function configHome () {
-    cp -RT home/ $HOME
-}
 function basicPrograms () {
     sudo apt install -y \
         git     \
@@ -19,9 +16,12 @@ function basicPrograms () {
         lsb-release \
         apt-transport-https \
         flameshot \
-        peek \
-        wget https://go.dev/dl/go1.19.4.linux-amd64.tar.gz && rm -rf /usr/local/go && tar -C /usr/local -xzf go1.19.4.linux-amd64.tar.gz \
-        export PATH=$PATH:/usr/local/go/bin
+        peek 
+        wget https://go.dev/dl/go1.19.4.linux-amd64.tar.gz 
+        sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.19.4.linux-amd64.tar.gz \
+}
+function configHome () {
+    cp -RT home/ $HOME
 }
 function configVIM () {
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
