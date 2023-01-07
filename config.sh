@@ -55,6 +55,12 @@ function MyZSHWithThemePowerlevel10 () {
     cp home/.zshrc ~/.zshrc
 }
 
+function gcloud (){
+    curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-412.0.0-linux-x86_64.tar.gz > /tmp/google-cloud-sdk.tar.gz
+    sudo tar -zxf /tmp/google-cloud-sdk.tar.gz --directory /opt/
+    sudo /opt/google-cloud-sdk/install.sh --quiet
+    sudo /opt/google-cloud-sdk/bin/gcloud --quiet components install gke-gcloud-auth-plugin kubectl alpha beta
+}
 updateSystem
 basicPrograms
 configHome
@@ -62,3 +68,4 @@ configVIM
 k8s
 docker
 MyZSHWithThemePowerlevel10
+gcloud
