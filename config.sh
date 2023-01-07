@@ -51,6 +51,7 @@ function MyZSHWithThemePowerlevel10 () {
     sudo chsh -s /bin/zsh $USER
     wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
     sh install.sh
+    cp home/.zshrc ~/.zshrc
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k 
 }
 updateSystem
