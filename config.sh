@@ -27,10 +27,13 @@ function configVIM () {
     vim +PluginInstall +qall
 }
 function k8s (){
-    sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
-    echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
-    sudo apt update
-    sudo apt install -y kubectl
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+    if [[ `echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check` == "kubectl: FAILED" ]]
+    then
+        exit 0
+    fi
+    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
     wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
 }
 function docker (){
