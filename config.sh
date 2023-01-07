@@ -48,11 +48,11 @@ function docker (){
     sudo chmod 666 /var/run/docker.sock
 }
 function MyZSHWithThemePowerlevel10 () {
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     sudo chsh -s /bin/zsh $USER
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    cp home/.zshrc ~/.zshrc
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k 
     cp home/.p10k.zsh ~/.p10k.zsh
+    cp home/.zshrc ~/.zshrc
 }
 
 updateSystem
