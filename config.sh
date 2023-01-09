@@ -27,10 +27,13 @@ function configVIM () {
     vim +PluginInstall +qall
 }
 function k8s (){
-    sudo curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
-    echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
-    sudo apt update
-    sudo apt install -y kubectl
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+    if [[ `echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check` == "kubectl: FAILED" ]]
+    then
+        exit 0
+    fi
+    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
     wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
     curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
     sudo apt-get install apt-transport-https --yes
@@ -50,10 +53,18 @@ function docker (){
     sudo chmod 666 /var/run/docker.sock
 }
 function MyZSHWithThemePowerlevel10 () {
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     sudo chsh -s /bin/zsh $USER
-    wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-    sh install.sh
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k 
+    cp home/.p10k.zsh ~/.p10k.zsh
+    cp home/.zshrc ~/.zshrc
+}
+
+function gcloud (){
+    curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-412.0.0-linux-x86_64.tar.gz > /tmp/google-cloud-sdk.tar.gz
+    sudo tar -zxf /tmp/google-cloud-sdk.tar.gz --directory /opt/
+    sudo /opt/google-cloud-sdk/install.sh --quiet
+    sudo /opt/google-cloud-sdk/bin/gcloud --quiet components install gke-gcloud-auth-plugin kubectl alpha beta
 }
 updateSystem
 basicPrograms
@@ -62,3 +73,4 @@ configVIM
 k8s
 docker
 MyZSHWithThemePowerlevel10
+gcloud
