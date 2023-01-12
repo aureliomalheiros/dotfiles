@@ -1,0 +1,74 @@
+set nocompatible              " be iMproved, required
+filetype on                   " required
+
+"Configuration Vundle - Default
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+call vundle#end()            " required
+filetype plugin indent on    " required
+"End configuration Vundle
+
+"Plugins
+Plugin 'Yggdroot/indentLine'
+Plugin 'scrooloose/nerdtree'
+Plugin 'PhilRunninger/nerdtree-visual-selection'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'preservim/nerdcommenter'
+"NerdTree Configuration
+let NERDTreeShowHidden=1
+
+"Nerd Commenter configuration
+filetype plugin on
+let g:NERDSpaceDelims = 1
+let g:NERDDefaultAlign = 'left'
+map cc <Plug>NERDCommenterInvert
+
+"Airline configuration
+set laststatus=2
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_statusline_ontop = 0
+let g:airline_themes = 'base16_twilight'
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+nnoremap <M-Right> :bn<cr>
+nnoremap <M-Left>  :bp<cr>
+nnoremap <c-x> :bp \|bd #<cr>
+
+"Map key
+nnoremap <F2> :below terminal<CR>
+
+"CTRLPVIM configuration
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_custom_ignore = '\v[\/]\.(swp|zip|hg|svn)$'
+let g:ctrlp_show_hidden = 1
+"Fonts 
+set guifont=DroidSansMono\ Nerd\ Font\ Mono:h12
+
+"Configuration
+set tabstop=4
+set encoding=UTF-8
+set number
+set mouse=a
+set history=5000
+set autoindent
+set smartindent
+set shiftwidth=4
+set expandtab
+
+"Yaml file
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+"NerdTree
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-PgUp> :tabnext<CR>
+let g:indentLine_char = '⦙'
+
