@@ -7,6 +7,7 @@ fi
 export ZSH="$HOME/.oh-my-zsh"
 export PATH=$PATH:/usr/local/go/bin
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH=$PATH:$HOME/go/bin
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
@@ -26,6 +27,7 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 
 #ALIAS
 alias markdown-lint="docker run -v $PWD:/workdir ghcr.io/igorshubovych/markdownlint-cli:latest --fix"

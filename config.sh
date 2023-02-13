@@ -15,7 +15,8 @@ function basicPrograms () {
         lsb-release \
         apt-transport-https \
         flameshot \
-        peek 
+        peek \
+        fzf
         wget https://go.dev/dl/go1.19.4.linux-amd64.tar.gz 
         sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.19.4.linux-amd64.tar.gz
 }
@@ -40,6 +41,10 @@ function k8s (){
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
     sudo apt-get update
     sudo apt-get install helm -y
+
+    sudo git clone https://github.com/ahmetb/kubectx /opt/kubectx
+    sudo ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
+    sudo ln -s /opt/kubectx/kubens /usr/local/bin/kubens
 }
 function docker (){
     sudo apt-get remove docker docker-engine docker.io containerd runc -y
