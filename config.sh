@@ -71,6 +71,11 @@ function gcloud (){
     sudo /opt/google-cloud-sdk/install.sh --quiet
     sudo /opt/google-cloud-sdk/bin/gcloud --quiet components install gke-gcloud-auth-plugin kubectl alpha beta
 }
+function dpkgfiles (){
+   wget https://az764295.vo.msecnd.net/stable/695af097c7bd098fbf017ce3ac85e09bbc5dda06/code_1.79.2-1686734195_amd64.deb -O vscode.deb
+   sudo dpkg -i vscode.deb
+}
+
 updateSystem
 basicPrograms
 configHome
@@ -79,3 +84,4 @@ k8s
 docker
 MyZSHWithThemePowerlevel10
 gcloud
+dpkgfiles
