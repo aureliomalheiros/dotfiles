@@ -16,10 +16,21 @@ function basicPrograms () {
         apt-transport-https \
         flameshot \
         peek \
-        fzf
-        wget https://go.dev/dl/go1.19.4.linux-amd64.tar.gz 
-        sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.19.4.linux-amd64.tar.gz
+        fzf \
+    	vim \
+        podman \
+	    tilix 
+        # Google Chrome
+        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        sudo dpkg -i google-chrome-stable_current_amd64.deb
+        rm google-chrome-stable_current_amd64.deb
+        sudo apt --fix-broken install -y
+        # Golang
+        wget https://go.dev/dl/go1.21.1.linux-amd64.tar.gz 
+        sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf https://go.dev/dl/go1.21.1.linux-amd64.tar.gz 
+        rm go1.21.1.linux-amd64.tar.gz 
 }
+
 function configHome () {
     cp -RT home/ $HOME
 }
@@ -46,17 +57,6 @@ function k8s (){
     sudo ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
     sudo ln -s /opt/kubectx/kubens /usr/local/bin/kubens
 }
-function docker (){
-    sudo apt-get remove docker docker-engine docker.io containerd runc -y
-    sudo mkdir -p /etc/apt/keyrings
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-    echo \
-    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    sudo apt update
-    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
-    sudo chmod 666 /var/run/docker.sock
-}
 function MyZSHWithThemePowerlevel10 () {
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     sudo chsh -s /bin/zsh $USER
@@ -65,23 +65,9 @@ function MyZSHWithThemePowerlevel10 () {
     cp home/.zshrc ~/.zshrc
 }
 
-function gcloud (){
-    curl https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-412.0.0-linux-x86_64.tar.gz > /tmp/google-cloud-sdk.tar.gz
-    sudo tar -zxf /tmp/google-cloud-sdk.tar.gz --directory /opt/
-    sudo /opt/google-cloud-sdk/install.sh --quiet
-    sudo /opt/google-cloud-sdk/bin/gcloud --quiet components install gke-gcloud-auth-plugin kubectl alpha beta
-}
-function dpkgfiles (){
-   wget https://az764295.vo.msecnd.net/stable/695af097c7bd098fbf017ce3ac85e09bbc5dda06/code_1.79.2-1686734195_amd64.deb -O vscode.deb
-   sudo dpkg -i vscode.deb
-}
 
 updateSystem
 basicPrograms
 configHome
 configVIM
 k8s
-docker
-MyZSHWithThemePowerlevel10
-gcloud
-dpkgfiles
