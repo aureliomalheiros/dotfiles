@@ -71,3 +71,4 @@ basicPrograms
 configHome
 configVIM
 k8s
+MyZSHWithThemePowerlevel10 
