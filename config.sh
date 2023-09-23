@@ -79,6 +79,11 @@ function displayLinkDocStation {
     chmod +x packages/displaylink-driver-5.8.0-63.33.run
     ./packages/displaylink-driver-5.8.0-63.33.run
 }
+function KeePass {
+    sudo add-apt-repository ppa:phoerious/keepassxc
+    sudo apt update
+    sudo apt install keepassxc
+}
 updateSystem
 basicPrograms
 configHome
@@ -87,4 +92,5 @@ k8s
 minikube
 MyZSHWithThemePowerlevel10 
 notion
+KeePass
 displayLinkDocStation
