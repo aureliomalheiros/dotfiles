@@ -58,6 +58,10 @@ function k8s (){
     sudo ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
     sudo ln -s /opt/kubectx/kubens /usr/local/bin/kubens
 }
+function minikube () {
+    curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+}
 function MyZSHWithThemePowerlevel10 () {
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     sudo chsh -s /bin/zsh $USER
@@ -76,5 +80,6 @@ basicPrograms
 configHome
 configVIM
 k8s
+minikube
 MyZSHWithThemePowerlevel10 
 notion
