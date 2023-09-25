@@ -60,7 +60,7 @@ function k8s (){
 }
 function minikube () {
     curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-sudo install minikube-linux-amd64 /usr/local/bin/minikube
+    sudo install minikube-linux-amd64 /usr/local/bin/minikube
 }
 function MyZSHWithThemePowerlevel10 () {
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
@@ -75,14 +75,19 @@ function notion {
     sudo apt update
     sudo apt install notion-app-enhanced -y
 }
-function displayLinkDocStation {
-    chmod +x packages/displaylink-driver-5.8.0-63.33.run
-    ./packages/displaylink-driver-5.8.0-63.33.run
-}
 function KeePass {
     sudo add-apt-repository ppa:phoerious/keepassxc
     sudo apt update
     sudo apt install keepassxc
+}
+function externalPackages {
+    wget https://discord.com/api/download?platform=linux&format=deb -O discord.deb
+    sudo dpkg -i discord.deb
+    sudo apt --fix-broken install -y
+}
+function displayLinkDocStation {
+    chmod +x packages/displaylink-driver-5.8.0-63.33.run
+    ./packages/displaylink-driver-5.8.0-63.33.run
 }
 updateSystem
 basicPrograms
@@ -93,4 +98,5 @@ minikube
 MyZSHWithThemePowerlevel10 
 notion
 KeePass
+externalPackages
 displayLinkDocStation
