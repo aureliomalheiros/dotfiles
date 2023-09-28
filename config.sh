@@ -69,12 +69,6 @@ function MyZSHWithThemePowerlevel10 () {
     cp home/.p10k.zsh ~/.p10k.zsh
     cp home/.zshrc ~/.zshrc
 }
-
-function notion {
-    echo "deb [trusted=yes] https://apt.fury.io/notion-repackaged/ /" | sudo tee /etc/apt/sources.list.d/notion-repackaged.list
-    sudo apt update
-    sudo apt install notion-app-enhanced -y
-}
 function KeePass {
     sudo add-apt-repository ppa:phoerious/keepassxc
     sudo apt update
@@ -96,7 +90,6 @@ configVIM
 k8s
 minikube
 MyZSHWithThemePowerlevel10 
-notion
 KeePass
 externalPackages
 displayLinkDocStation
