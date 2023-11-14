@@ -33,13 +33,6 @@ function basicPrograms () {
         rm go1.21.1.linux-amd64.tar.gz 
 }
 
-function configHome () {
-    cp -RT home/ $HOME
-}
-function configVIM () {
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    vim +PluginInstall +qall
-}
 function k8s (){
     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
     curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
@@ -70,21 +63,35 @@ function MyZSHWithThemePowerlevel10 () {
     cp home/.p10k.zsh ~/.p10k.zsh
     cp home/.zshrc ~/.zshrc
 }
-function KeePass {
+function KeePass () {
     sudo add-apt-repository ppa:phoerious/keepassxc
     sudo apt update
-    sudo apt install keepassxc
+    sudo apt install keepassxc -y
 }
-function displayLinkDocStation {
+function vscode () {
+    sudo apt install software-properties-common apt-transport-https wget
+    wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+    sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+    sudo apt update
+    sudo apt install code -y
+}
+function configHome () {
+    cp -RT home/ $HOME
+}
+function configVIM () {
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    vim +PluginInstall +qall
+}
+function displayLinkDocStation () {
     chmod +x packages/displaylink-driver-5.8.0-63.33.run
     ./packages/displaylink-driver-5.8.0-63.33.run
 }
 updateSystem
 basicPrograms
-configHome
-configVIM
 k8s
 minikube
 MyZSHWithThemePowerlevel10 
 KeePass
+configHome
+configVIM
 displayLinkDocStation
