@@ -75,11 +75,6 @@ function KeePass {
     sudo apt update
     sudo apt install keepassxc
 }
-function externalPackages {
-    wget https://discord.com/api/download?platform=linux&format=deb -O discord.deb
-    sudo dpkg -i discord.deb
-    sudo apt --fix-broken install -y
-}
 function displayLinkDocStation {
     chmod +x packages/displaylink-driver-5.8.0-63.33.run
     ./packages/displaylink-driver-5.8.0-63.33.run
@@ -92,5 +87,4 @@ k8s
 minikube
 MyZSHWithThemePowerlevel10 
 KeePass
-externalPackages
 displayLinkDocStation
