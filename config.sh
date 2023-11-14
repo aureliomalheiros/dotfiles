@@ -92,6 +92,7 @@ k8s
 minikube
 MyZSHWithThemePowerlevel10 
 KeePass
+vscode
 configHome
 configVIM
 displayLinkDocStation
