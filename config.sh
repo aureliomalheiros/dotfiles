@@ -20,8 +20,7 @@ function basicPrograms () {
         vim \
         podman \
         tilix \
-        mariadb-client \
-        virtualbox
+        mariadb-client 
         # Google Chrome
         wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
         sudo apt --fix-broken install -y
@@ -70,6 +69,7 @@ function awscli () {
 function minikube () {
     curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
     sudo install minikube-linux-amd64 /usr/local/bin/minikube
+    sudo apt install -y virtualbox
 }
 function MyZSHWithThemePowerlevel10 () {
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
