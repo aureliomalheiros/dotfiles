@@ -77,6 +77,7 @@ function MyZSHWithThemePowerlevel10 () {
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k 
     cp home/.p10k.zsh ~/.p10k.zsh
     cp home/.zshrc ~/.zshrc
+    git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 }
 function KeePass () {
     sudo add-apt-repository ppa:phoerious/keepassxc
@@ -101,15 +102,49 @@ function displayLinkDocStation () {
     chmod +x packages/displaylink-driver-5.8.0-63.33.run
     ./packages/displaylink-driver-5.8.0-63.33.run
 }
-updateSystem
-basicPrograms
-k8s
-terraform
-awscli
-minikube
-MyZSHWithThemePowerlevel10 
-KeePass
-vscode
-configHome
-configVIM
-displayLinkDocStation
+
+function setupPersonal () {
+    updateSystem
+    basicPrograms
+    k8s
+    terraform
+    awscli
+    minikube
+    MyZSHWithThemePowerlevel10
+    KeePass
+    vscode
+    configHome
+    configVIM
+    displayLinkDocStation
+}
+
+function setupCorporate () {
+    updateSystem
+    basicPrograms
+    k8s
+    terraform
+    awscli
+    MyZSHWithThemePowerlevel10
+    vscode
+    configHome
+    configVIM
+    displayLinkDocStation
+}
+
+function main (){
+    echo "Select your machine type: 1 - Personal, 2 - Corporate"
+    read machineType
+
+    case $machineType in 
+        1)
+            echo "Install all applications"
+            setupPersonal
+            ;;
+        2) 
+            echo "Install only corporate applications"
+            setupCorporate
+            ;;
+        *)
+            echo "Invalid option"
+            ;;
+}
