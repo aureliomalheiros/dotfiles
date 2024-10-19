@@ -131,7 +131,7 @@ function setupCorporate () {
     displayLinkDocStation
 }
 
-function main (){
+function main() {
     echo "Select your machine type: 1 - Personal, 2 - Corporate"
     read machineType
 
@@ -147,4 +147,7 @@ function main (){
         *)
             echo "Invalid option"
             ;;
+    esac
 }
+
+main
