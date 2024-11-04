@@ -181,7 +181,7 @@ function MyZSHWithThemePowerlevel10 () {
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k 
     cp home/.p10k.zsh ~/.p10k.zsh
     cp home/.zshrc ~/.zshrc
-    git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
+    sudo git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 }
 
 function vscode () {
