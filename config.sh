@@ -98,6 +98,9 @@ function basicPrograms () {
         echo "Install NotesNook" 📝
         sudo snap install notesnook > "$tmp_file" 2>&1
 
+        echo "Install keepassxc" 🔐
+        sudo snap install keepassxc > "$tmp_file" 2>&1
+
         echo "Install Docker" 🐳 
         sudo install -m 0755 -d /etc/apt/keyrings > "$tmp_file" 2>&1
         sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc > "$tmp_file" 2>&1
@@ -118,17 +121,13 @@ function basicPrograms () {
         sudo dpkg -i google-chrome-stable_current_amd64.deb > "$tmp_file" 2>&1
         sudo apt --fix-broken install -y > "$tmp_file" 2>&1
 
-        echo "Install KeepassXC" 🔐
-        sudo add-apt-repository ppa:phoerious/keepassxc
-        fastUpdate
-        sudo apt install keepassxc -y > "$tmp_file" 2>&1
 }
 
 function k8s (){
     echo "Configure Env k8s" 🚀
 
-    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" > "$tmp_file" 2>&1
-    curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256" > "$tmp_file" 2>&1
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
     if [[ `echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check` == "kubectl: FAILED" ]]
     then
         exit 0
