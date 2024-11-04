@@ -96,6 +96,9 @@ function basicPrograms () {
         tmux \
         mariadb-client > "$tmp_file" 2>&1
 
+        echo "Install NotesNook" 📝
+        snap install notesnook > "$tmp_file" 2>&1
+
         echo "Install Docker" 🐳 
         sudo install -m 0755 -d /etc/apt/keyrings > "$tmp_file" 2>&1
         sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc > "$tmp_file" 2>&1
