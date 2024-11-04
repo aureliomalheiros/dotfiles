@@ -35,7 +35,7 @@ function setupPersonal () {
         . /etc/os-release
 
         if [[ "$ID" == "debian" ]]; then
-            sudo apt install -y snapd > /dev/null > $tmp_file
+            sudo apt install -y snapd > "$tmp_file" 2>&1
         else
             echo "Your system is not Debian based. Snapd will not be installed."
         fi
@@ -71,22 +71,21 @@ function setupCorporate () {
     configVIM
 }
 
-main
-
 function fastUpdate () {
     echo "Fast update" 🔄
-    sudo apt update > /dev/null > $tmp_file
+    sudo apt update > "$tmp_file" 2>&1
 }
 
 function updateSystem () {
     echo "[Update and Upgrade System]" 🔄
-    sudo apt update > /dev/null > $tmp_file
-    sudo apt upgrade -y > /dev/null > $tmp_file
+    sudo apt update > "$tmp_file" 2>&1
+    sudo apt upgrade -y > "$tmp_file" 2>&1
     echo "Update finished" 🆗
 }
 
 function basicPrograms () {
-    echo "Install basic Programs" :shipit:
+    echo "Install basic Programs" 📦
+    tmp_file=$(mktemp)
     sudo apt install -y \
         git     \
         gcc     \
@@ -104,26 +103,26 @@ function basicPrograms () {
         vim \
         tilix \
         tmux \
-        mariadb-client > /dev/null > $tmp_file
+        mariadb-client > "$tmp_file" 2>&1
 
-        echo "Install Docker" 🐳
-        sudo install -m 0755 -d /etc/apt/keyrings > /dev/null > $tmp_file
-        sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc > /dev/null > $tmp_file
+        echo "Install Docker" 🐳 
+        sudo install -m 0755 -d /etc/apt/keyrings > "$tmp_file" 2>&1
+        sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc > "$tmp_file" 2>&1
         sudo chmod a+r /etc/apt/keyrings/docker.asc
         echo \
             "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
             $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
             sudo tee /etc/apt/sources.list.d/docker.list > /dev/null 
-            sudo apt-get update > /dev/null > $tmp_file
+            sudo apt-get update > "$tmp_file" 2>&1
         sudo apt-get install -y \
             docker-ce docker-ce-cli \
             containerd.io \
             docker-buildx-plugin \
-            docker-compose-plugin > /dev/null > $tmp_file
+            docker-compose-plugin > "$tmp_file" 2>&1
 
         echo "Install Google Chrome" 🌐
-        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb > /dev/null > $tmp_file
-        sudo dpkg -i google-chrome-stable_current_amd64.deb > /dev/null > $tmp_file
+        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb > "$tmp_file" 2>&1
+        sudo dpkg -i google-chrome-stable_current_amd64.deb > "$tmp_file" 2>&1
 
 }
 
@@ -140,7 +139,7 @@ function k8s (){
     sudo apt-get install apt-transport-https --yes
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
     fastUpdate
-    sudo apt-get install helm -y ? /dev/null > $tmp_file
+    sudo apt-get install helm -y ? "$tmp_file" 2>&1
 
     sudo git clone https://github.com/ahmetb/kubectx /opt/kubectx
     sudo ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
@@ -155,26 +154,26 @@ function terraform () {
     https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
     sudo tee /etc/apt/sources.list.d/hashicorp.list
     fastUpdate
-    sudo apt-get install terraform -y > /dev/null > $tmp_file
+    sudo apt-get install terraform -y > "$tmp_file" 2>&1
 }
 
 function cloudProvider () {
     # AWS Cloud Provider
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
     unzip awscliv2.zip
-    sudo ./aws/install -y > /dev/null > $tmp_file
+    sudo ./aws/install -y > "$tmp_file" 2>&1
     # GCP Cloud Provider
     curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
     echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
     fastUpdate 
-    sudo apt-get install google-cloud-cli > /dev/null > $tmp_file
+    sudo apt-get install google-cloud-cli > "$tmp_file" 2>&1
 
 }
 
 function minikube () {
     curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
     sudo install minikube-linux-amd64 /usr/local/bin/minikube
-    sudo apt install -y virtualbox > /dev/null > $tmp_file
+    sudo apt install -y virtualbox > "$tmp_file" 2>&1
 }
 
 function MyZSHWithThemePowerlevel10 () {
@@ -188,14 +187,14 @@ function MyZSHWithThemePowerlevel10 () {
 function KeePass () {
     sudo add-apt-repository ppa:phoerious/keepassxc
     fastUpdate
-    sudo apt install keepassxc -y > /dev/null > $tmp_file
+    sudo apt install keepassxc -y > "$tmp_file" 2>&1
 }
 function vscode () {
     sudo apt install software-properties-common apt-transport-https wget
     wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
     sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
     fastUpdate
-    sudo apt install code -y > /dev/null > $tmp_file
+    sudo apt install code -y > "$tmp_file" 2>&1
 }
 function configHome () {
     cp -RT home/ $HOME
