@@ -162,6 +162,7 @@ function terraform () {
 }
 
 function cloudProvider () {
+    echo "Install Cloud Provider" ☁️
     # AWS Cloud Provider
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" > "$tmp_file" 2>&1
     unzip awscliv2.zip > "$tmp_file" 2>&1
@@ -176,6 +177,8 @@ function cloudProvider () {
 
 
 function MyZSHWithThemePowerlevel10 () {
+    echo "Configure my zsh with theme powerlevel10" 🚀
+
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     sudo chsh -s /bin/zsh $USER
@@ -186,9 +189,10 @@ function MyZSHWithThemePowerlevel10 () {
 }
 
 function vscode () {
-    sudo apt install software-properties-common apt-transport-https wget
-    wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-    sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+    echo "Install Visual Studio Code" 📝
+    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+    sudo install -o root -g root -m 644 packages.microsoft.gpg /usr/share/keyrings/
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" | sudo tee /etc/apt/sources.list.d/vscode.list
     fastUpdate
     sudo apt install code -y > "$tmp_file" 2>&1
 }
