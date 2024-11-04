@@ -198,5 +198,4 @@ function configVIM () {
     vim +PluginInstall +qall
 }
 
-
-
+main
