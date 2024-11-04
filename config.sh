@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-tmp_file="/tmp/install.tmp"
+tmp_file=$(mktemp)
 
 
 function main () {
@@ -24,12 +24,6 @@ function main () {
 }
 
 function setupPersonal () {
-
-    echo "Add user to sudo group" 🛠
-    su
-    echo "Enter your username"
-    read USER
-    sudo usermod -aG sudo $USER
 
     if [ -f /etc/os-release ]; then
         . /etc/os-release
@@ -55,8 +49,6 @@ function setupPersonal () {
     configHome
     configVIM
 
-    echo "Exit your user session and login again"
-    logout
 }
 
 function setupCorporate () {
@@ -85,7 +77,6 @@ function updateSystem () {
 
 function basicPrograms () {
     echo "Install basic Programs" 📦
-    tmp_file=$(mktemp)
     sudo apt install -y \
         git     \
         gcc     \
@@ -127,16 +118,16 @@ function basicPrograms () {
 }
 
 function k8s (){
-    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-    curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" > "$tmp_file" 2>&1
+    curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256" > "$tmp_file" 2>&1
     if [[ `echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check` == "kubectl: FAILED" ]]
     then
         exit 0
     fi
-    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-    wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
+    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl > "$tmp_file" 2>&1
+    wget -q -O - https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash > "$tmp_file" 2>&1
     curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
-    sudo apt-get install apt-transport-https --yes
+    sudo apt-get install apt-transport-https --yes > "$tmp_file" 2>&1
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
     fastUpdate
     sudo apt-get install helm -y ? "$tmp_file" 2>&1
