@@ -42,9 +42,7 @@ function setupPersonal () {
     k8s
     terraform
     awscli
-    minikube
     MyZSHWithThemePowerlevel10
-    KeePass
     vscode
     configHome
     configVIM
@@ -117,10 +115,17 @@ function basicPrograms () {
         echo "Install Google Chrome" 🌐
         wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb > "$tmp_file" 2>&1
         sudo dpkg -i google-chrome-stable_current_amd64.deb > "$tmp_file" 2>&1
+        sudo apt --fix-broken install -y > "$tmp_file" 2>&1
 
+        echo "Install KeepassXC" 🔐
+        sudo add-apt-repository ppa:phoerious/keepassxc
+        fastUpdate
+        sudo apt install keepassxc -y > "$tmp_file" 2>&1
 }
 
 function k8s (){
+    echo "Configure Env k8s" 🚀
+
     curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" > "$tmp_file" 2>&1
     curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256" > "$tmp_file" 2>&1
     if [[ `echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check` == "kubectl: FAILED" ]]
@@ -138,6 +143,10 @@ function k8s (){
     sudo git clone https://github.com/ahmetb/kubectx /opt/kubectx
     sudo ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
     sudo ln -s /opt/kubectx/kubens /usr/local/bin/kubens
+
+    curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+    sudo install minikube-linux-amd64 /usr/local/bin/minikube > "$tmp_file" 2>&1
+    sudo apt install -y virtualbox > "$tmp_file" 2>&1
 }
 
 function terraform () {
@@ -153,8 +162,8 @@ function terraform () {
 
 function cloudProvider () {
     # AWS Cloud Provider
-    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-    unzip awscliv2.zip
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" > "$tmp_file" 2>&1
+    unzip awscliv2.zip > "$tmp_file" 2>&1
     sudo ./aws/install -y > "$tmp_file" 2>&1
     # GCP Cloud Provider
     curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
@@ -164,11 +173,6 @@ function cloudProvider () {
 
 }
 
-function minikube () {
-    curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-    sudo install minikube-linux-amd64 /usr/local/bin/minikube
-    sudo apt install -y virtualbox > "$tmp_file" 2>&1
-}
 
 function MyZSHWithThemePowerlevel10 () {
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -179,11 +183,7 @@ function MyZSHWithThemePowerlevel10 () {
     cp home/.zshrc ~/.zshrc
     git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 }
-function KeePass () {
-    sudo add-apt-repository ppa:phoerious/keepassxc
-    fastUpdate
-    sudo apt install keepassxc -y > "$tmp_file" 2>&1
-}
+
 function vscode () {
     sudo apt install software-properties-common apt-transport-https wget
     wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
@@ -195,6 +195,7 @@ function configHome () {
     cp -RT home/ $HOME
 }
 function configVIM () {
+    echo "Config VIM" 📝
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     vim +PluginInstall +qall
 }
