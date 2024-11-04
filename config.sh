@@ -92,6 +92,7 @@ function basicPrograms () {
         vim \
         tilix \
         tmux \
+        gpg \
         mariadb-client > "$tmp_file" 2>&1
 
         echo "Install NotesNook" 📝
