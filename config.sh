@@ -23,19 +23,7 @@ function main () {
     esac
 }
 
-function setupPersonal () {
-
-    if [ -f /etc/os-release ]; then
-        . /etc/os-release
-
-        if [[ "$ID" == "debian" ]]; then
-            sudo apt install -y snapd > "$tmp_file" 2>&1
-        else
-            echo "Your system is not Debian based. Snapd will not be installed."
-        fi
-    else
-        echo "Not supported OS"
-    fi
+function setupPersonal () 
 
     updateSystem
     basicPrograms
@@ -92,6 +80,7 @@ function basicPrograms () {
         vim \
         tilix \
         tmux \
+        fzf \
         gpg \
         mariadb-client > "$tmp_file" 2>&1
 
