@@ -28,7 +28,6 @@ function setupPersonal ()
     updateSystem
     basicPrograms
     k8s
-    terraform
     awscli
     MyZSHWithThemePowerlevel10
     vscode
@@ -41,7 +40,6 @@ function setupCorporate () {
     updateSystem
     basicPrograms
     k8s
-    terraform
     awscli
     MyZSHWithThemePowerlevel10
     vscode
@@ -138,17 +136,6 @@ function k8s (){
     sudo apt install -y virtualbox > "$tmp_file" 2>&1
 }
 
-function terraform () {
-    wget -O- https://apt.releases.hashicorp.com/gpg | \
-    gpg --dearmor | \
-    sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
-    echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
-    https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
-    sudo tee /etc/apt/sources.list.d/hashicorp.list
-    fastUpdate
-    sudo apt-get install terraform -y > "$tmp_file" 2>&1
-}
-
 function cloudProvider () {
     echo "Install Cloud Provider" ☁️
     # AWS Cloud Provider
@@ -162,7 +149,6 @@ function cloudProvider () {
     sudo apt-get install google-cloud-cli > "$tmp_file" 2>&1
 
 }
-
 
 function MyZSHWithThemePowerlevel10 () {
     echo "Configure my zsh with theme powerlevel10" 🚀
