@@ -139,14 +139,14 @@ function k8s (){
 function cloudProvider () {
     echo "Install Cloud Provider" ☁️
     # AWS Cloud Provider
-    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" > "$tmp_file" 2>&1
-    unzip awscliv2.zip > "$tmp_file" 2>&1
-    sudo ./aws/install -y > "$tmp_file" 2>&1
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    unzip awscliv2.zip
+    sudo ./aws/install
     # GCP Cloud Provider
     curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
     echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
     fastUpdate 
-    sudo apt-get install google-cloud-cli > "$tmp_file" 2>&1
+    sudo apt-get install google-cloud-cli 
 
 }
 
