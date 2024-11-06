@@ -24,13 +24,11 @@ function main () {
 }
 
 function setupPersonal () 
-
     updateSystem
     basicPrograms
     k8s
     awscli
     MyZSHWithThemePowerlevel10
-    vscode
     configHome
     configVIM
 
@@ -42,7 +40,6 @@ function setupCorporate () {
     k8s
     awscli
     MyZSHWithThemePowerlevel10
-    vscode
     configHome
     configVIM
 }
@@ -80,13 +77,8 @@ function basicPrograms () {
         tmux \
         fzf \
         gpg \
+        alacritty \
         mariadb-client > "$tmp_file" 2>&1
-
-        echo "Install NotesNook" 📝
-        sudo snap install notesnook > "$tmp_file" 2>&1
-
-        echo "Install keepassxc" 🔐
-        sudo snap install keepassxc > "$tmp_file" 2>&1
 
         echo "Install Docker" 🐳 
         sudo install -m 0755 -d /etc/apt/keyrings > "$tmp_file" 2>&1
@@ -162,17 +154,10 @@ function MyZSHWithThemePowerlevel10 () {
     sudo git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
 }
 
-function vscode () {
-    echo "Install Visual Studio Code" 📝
-    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-    sudo install -o root -g root -m 644 packages.microsoft.gpg /usr/share/keyrings/
-    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" | sudo tee /etc/apt/sources.list.d/vscode.list
-    fastUpdate
-    sudo apt install code -y > "$tmp_file" 2>&1
-}
 function configHome () {
     cp -RT home/ $HOME
 }
+
 function configVIM () {
     echo "Config VIM" 📝
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
