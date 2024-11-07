@@ -78,6 +78,7 @@ function basicPrograms () {
         fzf \
         gpg \
         alacritty \
+        curl -fsSL https://get.pulumi.com | sh \
         mariadb-client > "$tmp_file" 2>&1
 
         echo "Install Docker" 🐳 
