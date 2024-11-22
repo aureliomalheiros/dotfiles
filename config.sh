@@ -127,6 +127,9 @@ function k8s (){
     curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
     sudo install minikube-linux-amd64 /usr/local/bin/minikube > "$tmp_file" 2>&1
     sudo apt install -y virtualbox > "$tmp_file" 2>&1
+
+    #kubecolor
+    go install github.com/kubecolor/kubecolor@latest
 }
 
 function cloudProvider () {

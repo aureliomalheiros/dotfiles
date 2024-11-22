@@ -110,6 +110,15 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$PATH:/opt/Telegram
 export PATH=$PATH:/opt/istio/bin/
 export PATH=$PATH:/usr/local/go/bin
-
+export PATH=$PATH:~/.pulumi/bin
+export PATH=$PATH:~/go/bin
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+source ~/powerlevel10k/powerlevel10k.zsh-theme
+
+# add Pulumi to the PATH
+export PATH=$PATH:/home/aureliomalheiros/.pulumi/bin
+#ALIAS
+alias python='python3'
+alias pip="pip3"
+alias kubectl="kubecolor"
